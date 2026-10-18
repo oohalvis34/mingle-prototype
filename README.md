@@ -12,7 +12,7 @@ This repository holds a **clickable prototype** of the app. It runs entirely in 
 
 Open the live link on your phone and tap **Get started**.
 
-- Live link: *add your Vercel URL here once it's deployed*
+- Live link: **https://mingle-prototype-kappa.vercel.app/**
 
 ## What you can try
 
