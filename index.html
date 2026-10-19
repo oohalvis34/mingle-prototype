@@ -1,4 +1,5 @@
 <title>Mingle</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Figtree:wght@400;500;600;700;800&display=swap">
@@ -23,7 +24,8 @@
   --crush:#FF7A97; --on-crush:#2B1A3A; --crush-ink:#FF9DB4; --leaf-ink:#7FE3B6; --leaf-well:#1E3A30; --danger:#FF9A6B;
   --eye:#FFF6F3; --eye-glint:#FF7A97; --gold-wash:#4A3714; --shadow:rgba(0,0,0,.4); --press:#120C19; --stage:#120C19;
   --dawn:radial-gradient(120% 90% at 50% 20%,#54307A 0%,#2B1A3A 55%,#1B1324 100%); color-scheme:dark}
-html,body{height:100%}
+html,body{height:100%;margin:0}
+@supports (height:100dvh){html,body{height:100dvh}}
 body{background:var(--stage);color:var(--ink);font-family:var(--body);font-size:15px;display:flex;justify-content:center;align-items:center;padding-left:max(0px,env(safe-area-inset-left,0px));padding-right:max(0px,env(safe-area-inset-right,0px))}
 *{box-sizing:border-box}
 button{font:inherit;color:inherit}
