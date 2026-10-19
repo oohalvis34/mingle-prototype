@@ -18,7 +18,7 @@ Open the live link on your phone and tap **Get started**.
 
 1. **Onboarding:** verify with Singpass (simulated), set up your profile, pick your blob avatar and choose your vibes.
 2. **Location and home:** set a home spot, where your visibility turns off automatically.
-3. **Discover who's nearby:** a radar-style map and a list view, plus scenes for the MRT, a concert and OurSpace@72.
+3. **Discover who's nearby:** a radar-style map and a list view, plus scenes for OurSpace@72 at Ngee Ann Poly, the NP bus stop and a campus concert.
 4. **Send a request:** view a profile with what you align and clash on, choose a gift, and wait through the ad (free plan).
 5. **Get connected and chat:** once they accept, you're connected and can start chatting.
 6. **Receive a request:** see what it's like when someone nearby sends you one.
