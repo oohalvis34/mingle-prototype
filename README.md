@@ -6,7 +6,7 @@ Mingle is a proximity-based dating app concept for Singapore. You spot someone y
 
 This repository holds a **clickable prototype** of the app. It runs entirely in the browser, so testers can try the full flow on their phone without installing anything.
 
-> **Prototype only.** Every profile is fictional. Singpass verification, payments and ads are simulated, and no data leaves your device.
+> **Prototype only.** Every profile is fictional. Singpass verification, payments and ads are simulated, and no data leaves your device, except in the two-phone demo below, which relays the demo's requests and messages through the public ntfy.sh service.
 
 ## Try it
 
@@ -24,6 +24,18 @@ Open the live link on your phone and tap **Get started**.
 6. **Receive a request:** see what it's like when someone nearby sends you one.
 7. **Plan a date:** browse date spots on Mingle Maps and plan the date in chat.
 8. **Safety and Premium:** report or block someone, and see what Premium unlocks.
+
+## Two-phone demo
+
+Show both sides of a connection live, with one phone as you and a second phone as Chloe.
+
+1. On phone 1, open the live link, tap **Two-phone demo** (on the welcome screen, or in **Me**), choose **Be Julian** (it shows your profile name) and tap **Start as Julian**. Note the 4-letter room code.
+2. On phone 2, open the same link, tap **Two-phone demo**, choose **Be Chloe**, type the code and tap **Join as Chloe**. Both phones show "connected".
+3. On Chloe's phone, tap **Lock this phone** to show the lock screen.
+4. On phone 1, find Chloe on the map and send her a request. It appears on her lock screen as a notification.
+5. Chloe taps the notification and **Connect back**. Phone 1 gets "Chloe accepted your request!", and the two phones can now chat, send date ideas and see each other typing.
+
+Both phones need internet. The demo uses the room code to keep each pair separate, so use a fresh code for each demo. To go back to the normal single-phone prototype, tap **Leave two-phone demo**.
 
 ## Feedback we're looking for
 
