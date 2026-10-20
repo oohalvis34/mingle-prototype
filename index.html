@@ -999,6 +999,9 @@ document.addEventListener('click',e=>{if(Date.now()-PZJUST<350&&e.target.closest
 document.addEventListener('wheel',e=>{const v=e.target.closest('.pz');if(!v)return;e.preventDefault();const p=pzG(v.dataset.pz);const r=v.getBoundingClientRect();pzZoom(v.dataset.pz,p.z*(e.deltaY<0?1.1:.9),e.clientX-r.left,e.clientY-r.top)},{passive:false});
 /* ---------- Watch Together (events side feature) ---------- */
 Object.assign(LP,{
+ climb:'<path d="M6 20c1-4 3-6 6-7M12 13l3-5 3 2"/><circle cx="14" cy="4.5" r="1.8"/><circle cx="6" cy="8" r="1.6" fill="currentColor"/><circle cx="19.5" cy="15" r="1.6" fill="currentColor"/><circle cx="9" cy="16.5" r="1.3" fill="currentColor"/>',
+ shuttle:'<path d="M12 13.5L7 4.5l2.5-1 2.5 5 2.5-5 2.5 1-5 9z"/><circle cx="12" cy="17" r="3.5"/>',
+ run:'<circle cx="14.5" cy="4.5" r="2"/><path d="M6 20l3.5-5 3 2 1-5-4-1-2.5 3"/><path d="M13.5 12l2.5 3h3.5M10 20h0"/>',
  compass:'<circle cx="12" cy="12" r="8.5"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>',
  ticket:'<path d="M4 7.5A1.5 1.5 0 0 1 5.5 6h13A1.5 1.5 0 0 1 20 7.5V10a2 2 0 0 0 0 4v2.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 16.5V14a2 2 0 0 0 0-4z"/><path d="M14.5 6.5v11" stroke-dasharray="1.5 2.5"/>',
  clock:'<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>',
@@ -1015,6 +1018,9 @@ const EV_SLOT={fri:['Fri night','Fri · 7:30 PM'],satA:['Sat afternoon','Sat · 
 const EV_ALL=['fri','satA','satN','sunA','sunN'];
 const EVENTS=[
  {id:'skyline',title:'Midnight Skyline',cat:'Movie',sub:'Superhero action · 2 h 14 min',when:'Now showing',interested:184,art:'film',g:['#FF6B8B','#5B2A86'],slots:EV_ALL},
+ {id:'boulder',title:'Beginner bouldering night',cat:'Sports',sub:'Climb together · shoe rental at the gym',when:'Fri night & weekend afternoons',interested:58,art:'climb',g:['#3DBE8B','#2367A8'],slots:['fri','satA','sunA'],active:1,level:'Beginner friendly',book:'Book entry',venues:{Central:'Bouldering gym · Bugis',West:'Bouldering gym · Clementi',East:'Bouldering gym · Paya Lebar',North:'Bouldering gym · Woodlands','North-East':'Bouldering gym · Serangoon'},lines:['First time here, go easy on me 😅','Shoes are $5 to rent at the counter','Anyone want to try the purple route together?','Bubble tea after? I’ll be starving','I’ll grab a spot near the beginner wall']},
+ {id:'badminton',title:'Weekend badminton doubles',cat:'Sports',sub:'Casual doubles · court split between 4',when:'Sat & Sun afternoons',interested:71,art:'shuttle',g:['#FFC94A','#3DBE8B'],slots:['satA','sunA'],active:1,level:'All levels',book:'Split the court',venues:{Central:'Community club · Toa Payoh',West:'Sports hall · Jurong East',East:'Sports hall · Bedok',North:'Sports hall · Yishun','North-East':'Sports hall · Hougang'},lines:['I have extra shuttlecocks','Haven’t played since sec school 😂','Rotate partners every game?','Court is booked, see you there!','Kopi after at the hawker centre?']},
+ {id:'run',title:'Night run club · 5 km',cat:'Sports',sub:'Easy pace, no one left behind',when:'Sun · 8:00 PM',interested:49,art:'run',g:['#7CC6F2','#2B1A3A'],slots:['sunN'],active:1,level:'Easy pace',free:1,venue:'East Coast Park, Carpark C',meet:'by the carpark entrance',lines:['Easy pace right? 😅','Meet at the carpark entrance','Bring water, it’s humid tonight','Hawker food after the run?','I’ll be in a bright yellow tee']},
  {id:'tide',title:'Neon Tide live',cat:'Concert',sub:'Indie pop · outdoor stage',when:'Sat · 7:30 PM',interested:142,art:'mic',g:['#7CC6F2','#3B2B8F'],slots:['satN'],venue:'Esplanade Outdoor Theatre'},
  {id:'paper',title:'Paper Moons',cat:'Movie',sub:'Rom-com · 1 h 52 min',when:'Now showing',interested:96,art:'film',g:['#FFC94A','#FF6B8B'],slots:EV_ALL},
  {id:'derby',title:'City derby screening',cat:'Sports',sub:'Football · big-screen watch party',when:'Sun · 8:00 PM',interested:77,art:'ball',g:['#3DBE8B','#1C4A3A'],slots:['sunN'],venue:'Kallang fan zone'},
@@ -1025,10 +1031,10 @@ const EV=id=>EVENTS.find(e=>e.id===id);
 const MY_LIKES=['Bouldering','Kopi','Films','Hawker food','Bubble tea'];
 const EVP={
  aisha:{name:'Aisha',age:22,color:'sunny',f:1,likes:['Films','Bubble tea','Hawker food','Bouldering'],rel:98},
- marcus:{name:'Marcus',age:24,color:'sky',likes:['Films','Gym','Kopi'],rel:93},
+ marcus:{name:'Marcus',age:24,color:'sky',likes:['Films','Badminton','Kopi'],rel:93},
  jia:{name:'Jia Hui',age:21,color:'pink',f:1,likes:['Bubble tea','K-pop','Films'],rel:100},
- ryan:{name:'Ryan',age:25,color:'mint',likes:['Football','Hawker food','Kopi'],rel:88},
- sofia:{name:'Sofia',age:23,color:'lilac',f:1,likes:['Bouldering','Indie music','Films'],rel:96},
+ ryan:{name:'Ryan',age:25,color:'mint',likes:['Football','Running','Hawker food','Kopi'],rel:88},
+ sofia:{name:'Sofia',age:23,color:'lilac',f:1,likes:['Bouldering','Running','Indie music','Films'],rel:96},
  dev:{name:'Dev',age:26,color:'sunny',likes:['Football','Films','Photography'],rel:91},
  chloe:{name:'Chloe',age:23,color:'pink',f:1,likes:['Films','Sourdough','Bubble tea'],rel:97},
  priya:{name:'Priya',age:24,color:'mint',f:1,likes:['Bouldering','Kopi','Desserts'],rel:95},
@@ -1044,9 +1050,15 @@ const EVG=[
  {id:'g6',ev:'tide',host:'sofia',region:'West',slot:'satN',max:6,members:['sofia','wei','aisha']},
  {id:'g7',ev:'derby',host:'ryan',region:'Central',slot:'sunN',max:6,members:['ryan','dev','darren']},
  {id:'g8',ev:'market',host:'priya',region:'East',slot:'satA',max:5,members:['priya','aisha']},
+ {id:'g10',ev:'boulder',host:'sofia',region:'Central',slot:'fri',max:5,members:['sofia','priya']},
+ {id:'g11',ev:'boulder',host:'aisha',region:'West',slot:'satA',max:4,wo:1,members:['aisha','jia','priya']},
+ {id:'g12',ev:'boulder',host:'dev',region:'East',slot:'sunA',max:5,members:['dev','marcus','aisha']},
+ {id:'g13',ev:'badminton',host:'marcus',region:'East',slot:'satA',max:4,members:['marcus','dev','jia']},
+ {id:'g14',ev:'badminton',host:'jia',region:'Central',slot:'sunA',max:4,members:['jia','wei']},
+ {id:'g15',ev:'run',host:'ryan',region:'East',slot:'sunN',max:6,members:['ryan','sofia']},
  {id:'g9',ev:'starfall',host:'marcus',region:'Central',slot:'fri',max:5,members:['marcus','dev']}
 ];
-const EV_GOING={chloe:'skyline',priya:'market',wei:'tide',darren:'derby'};
+const EV_GOING={chloe:'skyline',priya:'boulder',wei:'tide',darren:'derby'};
 const EV_STEPS=['forming','confirmed','locked','done'];
 const EV_LINES=['Can’t wait 🍿','Shall we meet 20 min early at the entrance?','I’ll be in a green cap so you can spot me','Anyone want to grab food after?','Booked my seat! Row F','Running 5 min late, save me a spot 🙏'];
 const evDef=()=>({mine:{},chats:{},unread:{},conn:{},hosted:0,rel:100,cat:'All'});
@@ -1055,7 +1067,8 @@ DEF.ev=evDef();
 const EPid=id=>id==='me'?{name:'You',age:S.me.age,color:S.me.color,likes:MY_LIKES,rel:S.ev.rel}:EVP[id];
 const evShared=ids=>{const c={};ids.filter(i=>i!=='me').forEach(i=>EPid(i).likes.forEach(l=>{if(MY_LIKES.includes(l))c[l]=(c[l]||0)+1}));return Object.keys(c).sort((a,b)=>c[b]-c[a])};
 const evScore=ids=>ids.filter(i=>i!=='me').reduce((n,i)=>n+EPid(i).likes.filter(l=>MY_LIKES.includes(l)).length,0);
-const evVenue=g=>{const e=EV(g.ev);return e.venue||EV_CIN[g.region]};
+const evVenue=g=>{const e=EV(g.ev);return e.venue||(e.venues||EV_CIN)[g.region]};
+const evVen=e=>e.venues||EV_CIN;
 const evMineFor=evId=>Object.values(S.ev.mine).find(g=>g.ev===evId&&g.status!=='cancelled');
 const evOpen=evId=>EVG.filter(g=>g.ev===evId&&!S.ev.mine[g.id]&&g.members.length<g.max);
 const evLocked=e=>e.early&&!S.premium;
@@ -1072,15 +1085,15 @@ const evTop=(back,title,extra='')=>`<div class="row" style="padding:14px 14px 10
 /* Events tab */
 function eventsTab(){const cats=['All','Movie','Concert','Sports','Pop-up'];const cat=S.ev.cat||'All';const list=EVENTS.filter(e=>cat==='All'||e.cat===cat);const mine=Object.values(S.ev.mine).filter(g=>g.status!=='cancelled');
  return `<div class="scroll" style="padding:24px 18px 110px"><div class="stack" style="gap:16px">
- <div class="stack" style="gap:4px"><h1>Watch Together</h1><p class="muted">Pick something you want to see. We'll put you in a small group of people who want to go too.</p></div>
+ <div class="stack" style="gap:4px"><h1>Watch Together</h1><p class="muted">Pick something to watch or do. We'll put you in a small group of people who want to go too.</p></div>
  ${mine.length?`<div class="stack" style="gap:8px"><span class="label">Your groups</span>${mine.map(g=>{const e=EV(g.ev);return `<button class="card row" data-a="evGroup" data-v="${g.id}" style="border:0;padding:10px 12px;cursor:pointer;text-align:left;width:100%"><span style="width:52px;flex:none">${evArt(e,52,14,26)}</span><div style="flex:1;min-width:0"><b style="font-family:var(--display);font-size:16px">${e.title}</b><div class="small muted">${EV_SLOT[g.slot][1]} · ${g.members.length} of ${g.max} going</div></div>${evStatusPill(g)}</button>`}).join('')}</div>`:''}
  <div class="row" style="gap:6px;overflow-x:auto;margin:0 -18px;padding:2px 18px;scrollbar-width:none">${cats.map(c=>`<button class="chip ${c===cat?'on':''}" style="flex:none;min-height:36px;font-size:14px" data-a="evCat" data-v="${c}" aria-pressed="${c===cat}">${c}</button>`).join('')}</div>
  ${list.map(e=>{const n=EVG.filter(g=>g.ev===e.id).length;const m=evMineFor(e.id);return `<button class="card stack" data-a="evOpen" data-v="${e.id}" style="border:0;padding:10px;gap:10px;cursor:pointer;text-align:left;width:100%;color:var(--ink)">
   <div style="position:relative">${evArt(e,128,16,60)}${e.early?`<span class="pill" style="position:absolute;left:10px;top:10px;background:#FFF0B8;color:#2B1A3A"><img src="${IMG.crown}" width="14" height="14" alt="">Premium early access</span>`:''}${m?`<span class="pill" style="position:absolute;right:10px;top:10px;background:#2B1A3A;color:#fff">${I.check} You're in a group</span>`:''}</div>
   <div class="stack" style="gap:4px;padding:0 4px 4px"><div class="row" style="justify-content:space-between;gap:8px"><b style="font-family:var(--display);font-size:19px">${e.title}</b>${evCatPill(e)}</div>
   <span class="small muted">${e.sub} · ${e.when}</span>
-  <span class="small" style="font-weight:700;color:var(--leaf-ink)">${e.interested} want to go · ${n} open group${n===1?'':'s'}</span></div></button>`}).join('')}
- <p class="small muted" style="text-align:center">Sample events for the demo. Everyone buys their own ticket.</p>
+  ${e.level?`<span class="pill" style="align-self:flex-start;background:var(--leaf-well);color:var(--leaf-ink)">${e.level}</span>`:''}<span class="small" style="font-weight:700;color:var(--leaf-ink)">${e.interested} want to go · ${n} open group${n===1?'':'s'}</span></div></button>`}).join('')}
+ <p class="small muted" style="text-align:center">Sample events for the demo. Everyone pays their own way.</p>
  </div></div>`}
 function evStatusPill(g){const m={forming:['Forming','var(--well)','var(--crush-ink)'],confirmed:['Confirmed','var(--leaf-well)','var(--leaf-ink)'],locked:['Locked in','#2B1A3A','#fff'],done:['Done','var(--well)','var(--muted)'],cancelled:['Cancelled','#FFE1D6','#B8400E']}[g.status];return `<span class="pill" style="background:${m[1]};color:${m[2]};flex:none">${m[0]}</span>`}
 
@@ -1088,7 +1101,7 @@ function evStatusPill(g){const m={forming:['Forming','var(--well)','var(--crush-
 SCR.event=()=>{const e=EV(S.evCur);const open=evOpen(e.id);const m=evMineFor(e.id);const lock=evLocked(e);
  return `<div class="scr">${evTop('evHome',e.title)}<div class="scroll" style="padding:4px 18px 28px"><div class="stack" style="gap:16px">
  ${evArt(e,170,24,76)}
- <div class="stack" style="gap:6px"><div class="row" style="gap:8px">${evCatPill(e)}${e.early?`<span class="pill" style="background:#FFF0B8;color:#2B1A3A"><img src="${IMG.crown}" width="14" height="14" alt="">Early access</span>`:''}</div><h1>${e.title}</h1><p class="muted">${e.sub} · ${e.when}${e.venue?' · '+e.venue:''}</p><span class="small" style="font-weight:700;color:var(--leaf-ink)">${e.interested} people want to go</span></div>
+ <div class="stack" style="gap:6px"><div class="row" style="gap:8px">${evCatPill(e)}${e.level?`<span class="pill" style="background:var(--leaf-well);color:var(--leaf-ink)">${e.level}</span>`:''}${e.early?`<span class="pill" style="background:#FFF0B8;color:#2B1A3A"><img src="${IMG.crown}" width="14" height="14" alt="">Early access</span>`:''}</div><h1>${e.title}</h1><p class="muted">${e.sub} · ${e.when}${e.venue?' · '+e.venue:''}</p><span class="small" style="font-weight:700;color:var(--leaf-ink)">${e.interested} people want to go</span></div>
  ${lock?`<div class="card stack" style="padding:16px;gap:10px;background:linear-gradient(120deg,#FFF0B8,#FFE3EA);color:#2B1A3A"><div class="row"><img src="${IMG.crown}" width="40" height="40" alt=""><div><b style="font-family:var(--display);font-size:17px">Premium gets in first</b><div class="small">Groups for this film open to Premium members now and to everyone next Thursday.</div></div></div><button class="btn sun sm" data-a="go" data-r="premium">Get early access</button></div>`
  :m?`<button class="card row" data-a="evGroup" data-v="${m.id}" style="border:0;padding:14px;cursor:pointer;text-align:left;width:100%;background:var(--leaf-well);color:var(--ink)">${tile('users','#fff','var(--leaf-ink)')}<div style="flex:1;min-width:0"><b>You're in a group</b><div class="small muted">${EV_SLOT[m.slot][1]} · ${m.region} · ${m.members.length} of ${m.max} going</div></div>${evStatusPill(m)}</button>`
  :`<div class="stack" style="gap:8px"><button class="btn" data-a="evFind">${L('users',24)}Find me a group</button><button class="btn soft sm" data-a="evHost">${L('plus',20)}Host a group</button></div>`}
@@ -1110,13 +1123,13 @@ SCR.evfind=()=>{const w=S.ev.wiz,e=EV(w.ev);const fixed=!!e.venue;
   <h1>Finding your group</h1><p class="muted" style="max-width:290px">Checking ${e.interested} people who want to see ${e.title} for the same time, area and group type.</p>${S.premium?`<span class="pill" style="background:#FFF0B8;color:#2B1A3A"><img src="${IMG.crown}" width="14" height="14" alt="">Priority matching on</span>`:''}</div></div>`;
  const st=w.step,ok=st===0?w.slots.length>0:st===1?!!w.region:true;
  const head=['When can you go?',fixed?'Where are you coming from?':'Which area suits you?','What kind of group?'][st];
- const sub=['Pick every time that works. More times means a faster match.',fixed?`Everyone meets at ${e.venue}. We group people coming from the same area so you can travel together.`:'We only show the area until your group confirms. The exact cinema comes after.','Groups are 3 to 6 people.'][st];
+ const sub=['Pick every time that works. More times means a faster match.',fixed?`Everyone meets at ${e.venue}. We group people coming from the same area so you can travel together.`:'We only show the area until your group confirms. The exact place comes after.','Groups are 3 to 6 people.'][st];
  return `<div class="scr"><div class="top"><button class="round" data-a="evWizBack" aria-label="Back">${I.back}</button><div class="dots" aria-label="Step ${st+1} of 3">${[0,1,2].map(i=>`<span class="${i<=st?'on':''} ${i===st?'cur':''}"></span>`).join('')}</div><span style="width:44px"></span></div>
  <div class="scroll pad stack" style="gap:16px"><div class="stack" style="gap:6px"><span class="label">${e.title}</span><h1>${head}</h1><p class="muted">${sub}</p></div>
  ${st===0?`<div class="stack" style="gap:8px">${e.slots.map(k=>{const on=w.slots.includes(k);return `<button class="radio ${on?'on':''}" role="checkbox" aria-checked="${on}" data-a="evSlot" data-v="${k}"><span class="dot" style="border-radius:7px">${on?`<span style="color:var(--crush);display:flex">${I.check}</span>`:''}</span><span style="flex:1">${EV_SLOT[k][0]}</span><span class="small muted">${EV_SLOT[k][1].split(' · ')[1]}</span></button>`}).join('')}</div>`:''}
- ${st===1?`<div class="stack" role="radiogroup" style="gap:8px">${EV_REG.map(r=>`<button class="radio ${w.region===r?'on':''}" role="radio" aria-checked="${w.region===r}" data-a="evRegion" data-v="${r}"><span class="dot"></span><span style="flex:1">${r}</span>${fixed?'':`<span class="small muted">${EV_CIN[r]}</span>`}</button>`).join('')}</div>`:''}
+ ${st===1?`<div class="stack" role="radiogroup" style="gap:8px">${EV_REG.map(r=>`<button class="radio ${w.region===r?'on':''}" role="radio" aria-checked="${w.region===r}" data-a="evRegion" data-v="${r}"><span class="dot"></span><span style="flex:1">${r}</span>${fixed?'':`<span class="small muted">${evVen(e)[r]}</span>`}</button>`).join('')}</div>`:''}
  ${st===2?`<div class="stack" role="radiogroup" style="gap:8px">${[['small','Small group','3 to 6 people, anyone verified','busts_in_silhouette'],['wo','Women-only group','Singpass confirms everyone in it is a woman','shield']].map(([k,a,b,ic])=>`<button class="radio ${w.type===k?'on':''}" role="radio" aria-checked="${w.type===k}" data-a="evType" data-v="${k}" style="min-height:70px"><span class="dot"></span><span style="flex:1"><b style="display:block">${a}</b><span class="small muted" style="font-weight:500">${b}</span></span>${E(ic,32)}</button>`).join('')}</div>
-  <div class="row small muted" style="gap:8px;align-items:flex-start;padding:10px 12px;border-radius:14px;background:var(--well)">${L('users',18,'color:var(--crush-ink)')}<span>We rank groups by how many interests you share, so you have more to talk about than the film.${S.premium?' Premium members are matched first.':''}</span></div>`:''}
+  <div class="row small muted" style="gap:8px;align-items:flex-start;padding:10px 12px;border-radius:14px;background:var(--well)">${L('users',18,'color:var(--crush-ink)')}<span>We rank groups by how many interests you share, so you have more to talk about than the event.${S.premium?' Premium members are matched first.':''}</span></div>`:''}
  </div><div class="pad"><button class="btn" data-a="evWizNext" ${ok?'':'disabled'}>${st===2?'Find my group':'Next'}</button></div></div>`};
 function evMatch(w){const pool=EVG.filter(g=>g.ev===w.ev&&!S.ev.mine[g.id]&&w.slots.includes(g.slot)&&g.region===w.region&&(w.type==='wo')===!!g.wo&&g.members.length<g.max);
  pool.sort((a,b)=>evScore(b.members)-evScore(a.members));
@@ -1132,7 +1145,7 @@ SCR.evhost=()=>{const e=EV(S.evCur),h=S.ev.hd;const fixed=!!e.venue;const capped
  const chip=(a,v,l,on)=>`<button class="chip ${on?'on':''}" style="min-height:40px;font-size:14px" data-a="${a}" data-v="${v}" aria-pressed="${on}">${l}</button>`;
  return `<div class="scr">${evTop('evBackEvent','Host a group')}<div class="scroll" style="padding:4px 18px 24px"><div class="stack" style="gap:18px">
  <div class="row">${'<span style="width:64px;flex:none">'+evArt(e,64,16,30)+'</span>'}<div><b style="font-family:var(--display);font-size:18px">${e.title}</b><div class="small muted">Others ask to join and you all confirm before the venue is shared.</div></div></div>
- ${sec(fixed?'Coming from':'Cinema',`<div class="stack" role="radiogroup" style="gap:8px">${EV_REG.map(r=>`<button class="radio ${h.region===r?'on':''}" role="radio" aria-checked="${h.region===r}" data-a="evHd" data-k="region" data-v="${r}"><span class="dot"></span><span style="flex:1">${fixed?r:EV_CIN[r]}</span><span class="small muted">${fixed?'meet at '+e.venue:r}</span></button>`).join('')}</div>${fixed?'':'<span class="small muted">Public venues only, so you always meet somewhere busy.</span>'}`)}
+ ${sec(fixed?'Coming from':e.cat==='Movie'?'Cinema':'Venue',`<div class="stack" role="radiogroup" style="gap:8px">${EV_REG.map(r=>`<button class="radio ${h.region===r?'on':''}" role="radio" aria-checked="${h.region===r}" data-a="evHd" data-k="region" data-v="${r}"><span class="dot"></span><span style="flex:1">${fixed?r:evVen(e)[r]}</span><span class="small muted">${fixed?'meet at '+e.venue:r}</span></button>`).join('')}</div>${fixed?'':'<span class="small muted">Public venues only, so you always meet somewhere busy.</span>'}`)}
  ${sec('Day and time',`<div class="row" style="flex-wrap:wrap;gap:6px">${e.slots.map(k=>chip('evHd" data-k="slot',k,EV_SLOT[k][1],h.slot===k)).join('')}</div>`)}
  ${sec('Group size',`<div class="row" style="gap:6px">${[3,4,5,6].map(n=>chip('evHd" data-k="max',n,n+' people',h.max===n)).join('')}</div>`)}
  <div class="card row" style="padding:12px 14px">${tile('shield','#FFE3EA','var(--crush-ink)')}<div style="flex:1;min-width:0"><b>Women only</b><div class="small muted">Singpass confirms everyone who joins is a woman</div></div><button class="toggle" role="switch" aria-checked="${!!h.wo}" aria-label="Women only" data-a="evHd" data-k="wo" data-v="${h.wo?0:1}"></button></div>
@@ -1148,8 +1161,8 @@ SCR.evgroup=()=>{const g=S.ev.mine[S.evGid];const e=EV(g.ev);const st=g.status;c
   :meConf?`<div class="card row" style="padding:14px;gap:12px"><span style="width:22px;height:22px;border-radius:999px;border:3px solid var(--line);border-top-color:var(--leaf);animation:spin 1s linear infinite;flex:none"></span><div><b>You're confirmed</b><div class="small muted">Waiting for everyone else to confirm (${(g.conf||[]).length} of ${n})</div></div></div>`
   :`<div class="stack" style="gap:6px"><button class="btn" data-a="evConfirm">${I.check} Confirm I'm going</button><span class="small muted" style="text-align:center">When everyone confirms, the group chat opens and the venue is revealed.</span></div>`}
  if(st==='confirmed'||st==='locked')action=`<div class="stack" style="gap:8px"><button class="btn" data-a="evChat">${L('chat',22)}Open group chat${S.ev.unread[g.id]?` <span class="badge" style="position:static">${S.ev.unread[g.id]}</span>`:''}</button>
-  <div class="row" style="gap:8px"><button class="btn soft sm" style="flex:1" data-a="evTickets">${L('ticket',20)}Get tickets</button><button class="btn soft sm" style="flex:1" data-a="evShare">${L('share',20)}Share plan</button></div>
-  <span class="small muted" style="text-align:center">Everyone buys their own ticket. ${st==='confirmed'?'The group locks 24 hours before, and no one new can join after that.':'Leaving now lowers your show-up score.'}</span>
+  <div class="row" style="gap:8px">${e.free?'':`<button class="btn soft sm" style="flex:1" data-a="evTickets">${L('ticket',20)}${e.book||'Get tickets'}</button>`}<button class="btn soft sm" style="flex:1" data-a="evShare">${L('share',20)}Share plan</button></div>
+  <span class="small muted" style="text-align:center">${e.free?'Free to join, no booking needed.':e.active?'Everyone pays their own share at the venue.':'Everyone buys their own ticket.'} ${st==='confirmed'?'The group locks 24 hours before, and no one new can join after that.':'Leaving now lowers your show-up score.'}</span>
   ${st==='locked'?`<button class="btn ink" data-a="evCheckIn">${L('pin',22)}I'm here · check in</button>`:''}</div>`;
  if(st==='done')action=evDoneBlock(g);
  if(st==='cancelled')action=`<div class="card stack" style="padding:16px;gap:10px;background:#FFE1D6;color:#2B1A3A"><b style="font-family:var(--display);font-size:18px">This group didn't fill in time</b><p class="small">It still had fewer than 3 people 6 hours before the start. We tried to merge it with another group for the same showing, but none had space, so it's cancelled. Nobody's show-up score is affected.</p><button class="btn sm" data-a="evRetry">Find another group</button></div>`;
@@ -1157,8 +1170,8 @@ SCR.evgroup=()=>{const g=S.ev.mine[S.evGid];const e=EV(g.ev);const st=g.status;c
  ${T.evNew?`<div class="card stack pop" style="padding:16px;gap:6px;background:var(--leaf-well);text-align:center;align-items:center">${E('party_popper',44)}<h2>You're in! ${n} of ${g.max} joined</h2><span class="small muted">${g.why==='new'?'No open group fitted, so we started one with the closest matches.':'This group matched your time, area and group type best.'}${sh.length?' You share '+sh.slice(0,3).join(', ')+'.':''}</span></div>`:''}
  ${stepper}
  <div class="card stack" style="padding:14px 16px;gap:12px">
-  <div class="row">${tile('clock')}<div><b>${EV_SLOT[g.slot][1]}</b><div class="small muted">${e.cat==='Movie'?'Meet 20 min before the film':'Meet 20 min before the start'}</div></div></div>
-  <div class="row">${tile(known?'pin':'lock',known?'var(--leaf-well)':'var(--well)',known?'var(--leaf-ink)':'var(--muted)')}<div style="flex:1;min-width:0">${known?`<b>${evVenue(g)}</b><div class="small muted">Meeting point: ${e.cat==='Movie'?'outside the box office':'main entrance'}</div>`:`<b>${g.region} area</b><div class="small muted">Exact venue is shown once everyone confirms</div>`}</div></div>
+  <div class="row">${tile('clock')}<div><b>${EV_SLOT[g.slot][1]}</b><div class="small muted">${e.cat==='Movie'?'Meet 20 min before the film':e.active?'Meet 10 min before to warm up':'Meet 20 min before the start'}</div></div></div>
+  <div class="row">${tile(known?'pin':'lock',known?'var(--leaf-well)':'var(--well)',known?'var(--leaf-ink)':'var(--muted)')}<div style="flex:1;min-width:0">${known?`<b>${evVenue(g)}</b><div class="small muted">Meeting point: ${e.meet?e.meet:e.cat==='Movie'?'outside the box office':e.active&&!e.venue?'at the front desk':'main entrance'}</div>`:`<b>${g.region} area</b><div class="small muted">Exact venue is shown once everyone confirms</div>`}</div></div>
   ${g.wo?`<div class="row">${tile('shield','#FFE3EA','var(--crush-ink)')}<div><b>Women only</b><div class="small muted">Checked with Singpass</div></div></div>`:''}
  </div>
  ${action}
@@ -1191,10 +1204,10 @@ SCR.evchat=()=>{const g=S.ev.mine[S.evGid];const e=EV(g.ev);const msgs=S.ev.chat
 
 /* helpers that change state */
 function evToGroup(gid){S.evGid=gid;S.evCur=S.ev.mine[gid].ev;go('evgroup')}
-function evSeedChat(g){if(S.ev.chats[g.id]&&S.ev.chats[g.id].length)return;const o=g.members.filter(x=>x!=='me');S.ev.chats[g.id]=[{who:o[0],text:'Hi everyone! Glad this one filled up 🎉'},{who:o[1]||o[0],text:EV_LINES[1]}];S.ev.unread[g.id]=2}
+function evSeedChat(g){if(S.ev.chats[g.id]&&S.ev.chats[g.id].length)return;const o=g.members.filter(x=>x!=='me');S.ev.chats[g.id]=[{who:o[0],text:'Hi everyone! Glad this one filled up 🎉'},{who:o[1]||o[0],text:(EV(g.ev).lines||EV_LINES)[1]}];S.ev.unread[g.id]=2}
 function evMakeConfirmed(g){g.status='confirmed';g.conf=g.members.slice();evSeedChat(g)}
 function evFillTo3(gid){const g=S.ev.mine[gid];if(!g||g.status!=='forming'||g.members.length>=3)return;const pool=Object.keys(EVP).filter(id=>!g.members.includes(id)&&(!g.wo||EVP[id].f)).sort((a,b)=>evScore([b])-evScore([a]));const add=pool[0];if(!add)return;g.members.splice(g.members.length-1,0,add);save();if(S.route==='evgroup'&&S.evGid===gid)render();toast(`${av(EVP[add].color,40)}<div style="flex:1"><b>${EVP[add].name} joined your group</b><div class="small" style="opacity:.8">${EV(g.ev).title} · ${g.members.length} of ${g.max}</div></div>`,()=>evToGroup(gid));if(g.members.length<3)setTimeout(()=>evFillTo3(gid),2600)}
-function evReply(gid){const g=S.ev.mine[gid];const o=g.members.filter(x=>x!=='me');const who=o[Math.floor(Math.random()*o.length)];setTimeout(()=>{T.evTyping=who;if(S.route==='evchat')render()},700);setTimeout(()=>{T.evTyping=null;const used=(S.ev.chats[gid]||[]).map(m=>m.text);const line=EV_LINES.find(l=>!used.includes(l))||'😄';S.ev.chats[gid].push({who,text:line});if(S.route!=='evchat'||S.evGid!==gid){S.ev.unread[gid]=(S.ev.unread[gid]||0)+1}render()},2100+Math.random()*700)}
+function evReply(gid){const g=S.ev.mine[gid];const o=g.members.filter(x=>x!=='me');const who=o[Math.floor(Math.random()*o.length)];setTimeout(()=>{T.evTyping=who;if(S.route==='evchat')render()},700);setTimeout(()=>{T.evTyping=null;const used=(S.ev.chats[gid]||[]).map(m=>m.text);const line=(EV(g.ev).lines||EV_LINES).find(l=>!used.includes(l))||'😄';S.ev.chats[gid].push({who,text:line});if(S.route!=='evchat'||S.evGid!==gid){S.ev.unread[gid]=(S.ev.unread[gid]||0)+1}render()},2100+Math.random()*700)}
 
 Object.assign(A,{
  evHome:()=>{S.route='app';S.tab='events';T.evNew=false;render()},
@@ -1217,7 +1230,7 @@ Object.assign(A,{
  evSet:e=>{const g=S.ev.mine[S.evGid],v=e.dataset.v;T.evNew=false;if(v==='forming'){g.status='forming';g.conf=[]}else if(v==='confirmed'||v==='locked'){while(g.members.length<3){const add=Object.keys(EVP).find(id=>!g.members.includes(id)&&(!g.wo||EVP[id].f));g.members.splice(g.members.length-1,0,add)}evMakeConfirmed(g);g.status=v}else if(v==='done'){if(g.members.length<3)A.evSet({dataset:{v:'confirmed'}});g.status='done';g.fb=null}else g.status='cancelled';render()},
  evChat:()=>{S.ev.unread[S.evGid]=0;go('evchat')},
  evChatBack:()=>{T.evRep=false;go('evgroup')},
- evTickets:()=>toast(L('ticket',30)+'<div><b>Demo: this opens the booking page</b><div class="small" style="opacity:.8">Each person buys their own ticket</div></div>'),
+ evTickets:()=>toast(L('ticket',30)+'<div><b>Demo: this opens the booking page</b><div class="small" style="opacity:.8">Each person pays their own share</div></div>'),
  evShare:()=>{const g=S.ev.mine[S.evGid],e=EV(g.ev);const txt=`I'm going to ${e.title} with a Mingle group: ${EV_SLOT[g.slot][1]} at ${evVenue(g)}.`;if(navigator.share){navigator.share({title:'My plan',text:txt}).catch(()=>{})}else{try{navigator.clipboard.writeText(txt)}catch(err){}toast(L('share',30)+'<div><b>Plan copied</b><div class="small" style="opacity:.8">Paste it to a friend so someone knows where you are</div></div>')}},
  evCheckIn:()=>{const g=S.ev.mine[S.evGid];g.status='done';g.fb=null;render();toast(E('round_pushpin',36)+'<b>Checked in. Enjoy!</b>')},
  evConnect:e=>{const id=e.dataset.v;S.ev.conn[id]=true;if(P(id)){S.gifts[id]='waving_hand';sendLike(id)}render();toast(E('waving_hand',36)+`<div><b>Request sent to ${EPid(id).name}</b><div class="small" style="opacity:.8">No ad, because you went together</div></div>`)},
