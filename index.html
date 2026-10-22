@@ -217,7 +217,7 @@ const GIFTS=[['waving_hand','Wave',false],['rose','Rose',true],['bouquet','Bouqu
 const giftName=k=>(GIFTS.find(g=>g[0]===k)||GIFTS[0])[1].toLowerCase();
 const OPENERS=['Bubble tea after your class? My treat','What are you studying?','Thanks for connecting back! Enjoying it so far?'];
 const DEF={route:'welcome',step:0,tab:'nearby',view:'map',onboarded:false,premium:false,visible:true,locUntil:null,ctx:'ourspace',ctxv:2,
- me:{name:'Julian',age:22,bio:'Kopi O kosong, Circle Line every morning. Will teach you bouldering badly.',color:'lilac',photo:null,photos:['j1','j4','j2'],vibes:{show:0,smoke:0,career:2,kids:0},ageMin:18,ageMax:34,home:true,radius:300},
+ me:{name:'Julian',age:22,bio:'Kopi O kosong, Circle Line every morning. Will teach you bouldering badly.',color:'lilac',photo:null,photos:['j1','j4','j2','j3'],vibes:{show:0,smoke:0,career:2,kids:0},ageMin:18,ageMax:34,home:true,radius:300},
  glances:{},likes:{},gifts:{},matches:[],chats:{},unread:{},blocked:[]};
 let DUO=null;try{DUO=JSON.parse(sessionStorage.getItem('mingle-duo')||'null')}catch(e){}
 try{const q=new URLSearchParams(location.search),c=(q.get('duo')||'').toUpperCase().replace(/[^A-Z0-9]/g,'');if(c.length===4)DUO={code:c,role:q.get('as')==='chloe'?'chloe':'me'}}catch(e){}
@@ -1264,7 +1264,7 @@ const PID=()=>DUO&&DUO.role==='chloe'?'duo':'chloe';
 const duoId=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 const duoPeerName=()=>DUO&&DUO.role==='chloe'?((S.duo&&S.duo.peer&&S.duo.peer.name)||'Julian'):'Chloe';
 function loadS(key){try{const o=JSON.parse(localStorage.getItem(key)||'null');if(!o)return null;const s=Object.assign(structuredClone(DEF),o);if(!s.ev)s.ev=evDef();return s}catch(e){return null}}
-function duoChloeS(){const s=structuredClone(DEF);if(!s.ev)s.ev=evDef();Object.assign(s,{onboarded:true,route:'app',tab:'nearby',jv3:1,jv4:1});Object.assign(s.me,{name:'Chloe',age:CHLOE0.age,bio:CHLOE0.bio,color:'pink',photos:CHLOE0.photos.slice(),verified:true,photo:null});return s}
+function duoChloeS(){const s=structuredClone(DEF);if(!s.ev)s.ev=evDef();Object.assign(s,{onboarded:true,route:'app',tab:'nearby',jv3:1,jv4:1,jv5:1});Object.assign(s.me,{name:'Chloe',age:CHLOE0.age,bio:CHLOE0.bio,color:'pink',photos:CHLOE0.photos.slice(),verified:true,photo:null});return s}
 function duoFresh(){const pid=PID();['chloe','duo'].forEach(id=>{delete S.likes[id];delete S.gifts[id];delete S.chats[id];delete S.unread[id];delete S.glances[id]});S.matches=S.matches.filter(x=>x!=='chloe'&&x!=='duo');S.declined=(S.declined||[]).filter(x=>x!=='chloe'&&x!=='duo');S.duo={code:DUO.code,out:null,in:null,con:false,seen:[],peer:null};return pid}
 function duoApplyPeople(){
  const ix=PEOPLE.findIndex(p=>p.id==='chloe'||p.id==='duo');
@@ -1274,10 +1274,10 @@ function duoApplyPeople(){
  const d=S.duo||{},inReq=d.in&&!d.con?d.in.gift:undefined;
  if(DUO.role==='me'){Object.assign(PEOPLE[ix],{likesBack:false,replies:[],requested:inReq});return}
  PEOPLE.forEach(p=>{p.requested=undefined});
- const pr=Object.assign({name:DEF.me.name,age:DEF.me.age,color:DEF.me.color,bio:DEF.me.bio,ph:['j1','j4','j2']},d.peer||{});
+ const pr=Object.assign({name:DEF.me.name,age:DEF.me.age,color:DEF.me.color,bio:DEF.me.bio,ph:['j1','j4','j2','j3']},d.peer||{});
  PEOPLE[ix]=Object.assign({},CHLOE0,{id:'duo',name:pr.name||'Julian',age:+pr.age||22,color:pr.color||'lilac',bio:pr.bio||'',photos:pr.ph&&pr.ph.length?pr.ph:undefined,job:'Student',clashes:["Early riser, you're a night owl"],likesBack:false,replies:[],requested:inReq});
 }
-function duoProf(){return {name:S.me.name,age:S.me.age,color:S.me.color,bio:String(S.me.bio||'').slice(0,160),ph:(S.me.photos||[]).filter(k=>typeof k==='string'&&IMG[k]).slice(0,3)}}
+function duoProf(){return {name:S.me.name,age:S.me.age,color:S.me.color,bio:String(S.me.bio||'').slice(0,160),ph:(S.me.photos||[]).filter(k=>typeof k==='string'&&IMG[k]).slice(0,6)}}
 function duoSnap(){const d=S.duo||{};let msgs=(S.chats[PID()]||[]).filter(m=>m.me&&m.i).slice(-12).map(m=>m.venue?{i:m.i,v:m.venue,w:m.when,ts:m.ts}:{i:m.i,x:String(m.text).slice(0,300),ts:m.ts});const st={out:d.out,con:!!d.con,msgs};while(JSON.stringify(st).length>3000&&st.msgs.length)st.msgs.shift();return st}
 
 /* transport: ntfy.sh relay (works anywhere), plus the artifact's live room and same-browser tabs */
@@ -1423,6 +1423,6 @@ if(S.route==='lock'&&!DUO)S.route=S.onboarded?'app':'welcome';
 
 if(S.route==='ad'||S.route==='chat'||S.route==='match'||S.route==='report')S.route=S.onboarded?'app':'welcome';
 if(S.route==='verify')T.vstep='intro';
-if(!S.me.photos)S.me.photos=['j1','j4','j2'];if(!S.jv4){S.jv3=S.jv4=1;S.me.photos=S.me.photos.filter(k=>k!=='j3');if(!S.me.photos.includes('j4'))S.me.photos.splice(Math.min(1,S.me.photos.length),0,'j4')}syncPhoto();
+if(!S.me.photos)S.me.photos=['j1','j4','j2','j3'];if(!S.jv5){S.jv3=S.jv4=S.jv5=1;S.me.photos=['j1','j4','j2','j3'].concat(S.me.photos.filter(k=>!/^j[1-4]$/.test(k))).slice(0,6)}syncPhoto();
 render();
 </script>
