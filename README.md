@@ -59,4 +59,4 @@ The site is static, so any static host works.
 
 ## Team
 
-Built by the TWC Startup team.
+Built by Designlabb Studio.
